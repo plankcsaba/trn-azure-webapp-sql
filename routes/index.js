@@ -35,10 +35,10 @@ pool.connect().then(() => {
 router.get('/', async (req, res) => {
   try {
     const result = await pool.request().query(`SELECT pc.name as CategoryName,
-    p.name as ProductName 
-    FROM [dbo].[ProductCategory] pc
-    JOIN [dbo].[Product] p ON pc.productcategoryid = p.productcategoryid
-    ORDER BY ProductName`);
+    p.name as ElemName 
+    FROM [dbo].[ElemKategoria] pc
+    JOIN [dbo].[Elem] p ON pc.elemkategoriaid = p.elemkategoriaid
+    ORDER BY ElemName`);
     //res.json(result.recordset);
     const data = result.recordset;
     res.render('index', { title: "Termék katalógus (Azure WebApp + SQL)", error: "", data, hostname: hostname });
@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
     console.error('Error executing SQL query:', err);
     //res.status(500).json({ error: 'Internal Server Error' });
     const data = [
-      { ProductName: "", CategoryName: "" }
+      { ElemName: "", CategoryName: "" }
     ];
     res.render('index', { title: "Termék katalógus (Azure WebApp + SQL)", error: "Adatbázis hiba", data, hostname: hostname });
     closeConnection();

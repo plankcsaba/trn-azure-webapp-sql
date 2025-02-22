@@ -30,9 +30,9 @@ async function connectAndQuery() {
 
         console.log("Reading rows from the Table...");
         var resultSet = await poolConnection.request().query(`SELECT TOP 20 pc.name as CategoryName,
-            p.name as ProductName 
-            FROM [dbo].[ProductCategory] pc
-            JOIN [dbo].[Product] p ON pc.productcategoryid = p.productcategoryid`);
+            p.name as ElemName 
+            FROM [dbo].[ElemKategoria] pc
+            JOIN [dbo].[Elem] p ON pc.elemkategoriaid = p.elemkategoriaid`);
 
         console.log(`${resultSet.recordset.length} rows returned.`);
 
@@ -45,7 +45,7 @@ async function connectAndQuery() {
 
         // ouput row contents from default record set
         resultSet.recordset.forEach(row => {
-            console.log("%s\t%s", row.CategoryName, row.ProductName);
+            console.log("%s\t%s", row.CategoryName, row.ElemName);
         });
 
         // close connection only when we're certain application is finished
