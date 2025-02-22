@@ -1,3 +1,10 @@
 {
-    "appService.zipIgnorePattern": ["./.env*","node_modules{,/**}"]
+    "appService.zipIgnorePattern": [
+        "./.env*",
+        "node_modules{,/**}"
+    ],
+    "workbench.colorCustomizations": {
+        "minimap.background": "#00000000",
+        "scrollbar.shadow": "#00000000"
+    }
 }

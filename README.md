@@ -17,9 +17,9 @@
 4. Add meg az adatbázis adatait:
    - Előfizetés
    - Erőforráscsoport: `adatbazisok`
-   - Adatbázis neve: `webshop`
+   - Adatbázis neve: `katalogus`
    - Kiszolgáló - itt hozzunk létre egy újat.
-     - Kiszolgálónév (egyedinek kell lennie): `trn-azure-sql-01`
+     - Kiszolgálónév (egyedinek kell lennie): `mentorklub2025-sql`
      - Hely: `north-europe`
      - Hitelesítési mód: `SQL- és Azure Active Directory-hitelesítés használata`
      - Azure AD rendszergazda beállításánál válasszuk ki a felhasználónkat
@@ -47,60 +47,60 @@ Telepítsd az [Azure Data Studio-t](https://learn.microsoft.com/en-gb/sql/azure-
 Nyissuk meg és jelentkezzünk be. Ehhez szükségünk lesz az adatbázis szerver adataira. Ezt a portálon, az adatbázis tulajdonságai alatt találjuk.
 (Kiszolgálónév, Kiszolgáló rendszergazdájának felhasználóneve, és a jelszó amit megadtunk a létrehozáskor)
 
-Ha bejelentkeztünk, futtassuk le a `webshop` adatbázison a következő scripteket
+Ha bejelentkeztünk, futtassuk le a `katalogus` adatbázison a következő scripteket
 
 ### Adat táblák létrehozása
 
 ```sql
-CREATE TABLE dbo.ProductCategory
+CREATE TABLE dbo.ElemKategoria
 (
-[productcategoryid] int PRIMARY KEY IDENTITY(1, 1),
+[elemkategoriaid] int PRIMARY KEY IDENTITY(1, 1),
 [name] varchar(30) NOT NULL,
 )
 
-CREATE TABLE dbo.Product
+CREATE TABLE dbo.Elem
 (
-[productid] int PRIMARY KEY IDENTITY(1, 1),
+[elemid] int PRIMARY KEY IDENTITY(1, 1),
 [name] varchar(100) NOT NULL,
-[productcategoryid] int,
+[elemkategoriaid] int,
 )
 ```
 
-### Adatok létrehozása a `ProductCategory` táblában
+### Adatok létrehozása a `ElemKategoria` táblában
 
 ```sql
-INSERT INTO dbo.ProductCategory(name)
+INSERT INTO dbo.ElemKategoria(name)
 VALUES ('Szoftver')
 
-INSERT INTO dbo.ProductCategory(name)
+INSERT INTO dbo.ElemKategoria(name)
 VALUES ('Hardver')
 ```
 
-### Adatok létrehozása a `Product` táblában
+### Adatok létrehozása a `Elem` táblában
 
 ```sql
-INSERT INTO dbo.Product(productcategoryid, name)
+INSERT INTO dbo.Elem(elemkategoriaid, name)
 VALUES (1, 'Windows 11')
 
-INSERT INTO dbo.Product(productcategoryid, name)
+INSERT INTO dbo.Elem(elemkategoriaid, name)
 VALUES (1, 'Windows 10')
 
-INSERT INTO dbo.Product(productcategoryid, name)
+INSERT INTO dbo.Elem(elemkategoriaid, name)
 VALUES (1, 'MacOS 13')
 
-INSERT INTO dbo.Product(productcategoryid, name)
+INSERT INTO dbo.Elem(elemkategoriaid, name)
 VALUES (1, 'Ubuntu 22.04')
 
-INSERT INTO dbo.Product(productcategoryid, name)
+INSERT INTO dbo.Elem(elemkategoriaid, name)
 VALUES (2, 'Dell 14" notebook')
 
-INSERT INTO dbo.Product(productcategoryid, name)
+INSERT INTO dbo.Elem(elemkategoriaid, name)
 VALUES (2, 'HP 14" notebook')
 
-INSERT INTO dbo.Product(productcategoryid, name)
+INSERT INTO dbo.Elem(elemkategoriaid, name)
 VALUES (2, 'MacBook Air M2')
 
-INSERT INTO dbo.Product(productcategoryid, name)
+INSERT INTO dbo.Elem(elemkategoriaid, name)
 VALUES (2, 'MacBook Pro M2 Pro')
 ```
 
@@ -118,9 +118,9 @@ VALUES (2, 'MacBook Pro M2 Pro')
 4. Add meg az webalkalmazás adatait:
    - Előfizetés
    - Erőforráscsoport: `webalkalmazasok`
-   - Név (Egyedinek kell lennie): `mywebshop`
+   - Név (Egyedinek kell lennie): `termekkatalogus`
    - Közzététel: `Kód`
-   - Futtatókötnyezet verme: `Node 20 LTS`
+   - Futtatókötnyezet verme: `Node 22 LTS`
    - Operációs rendszer: `Linux`
    - Régió: `north-europe`
    - Linux-csomagnál válasszunk egy létezőt vagy hozzunk létre újat
@@ -149,7 +149,7 @@ VALUES (2, 'MacBook Pro M2 Pro')
 | DB_USER     | adatgazda                                          |
 | DB_PASSWORD | <jelszó amit az adatbázis felhasználóhoz megadtál> |
 | DB_SERVER   | <SQL szerver kiszolgálóneve>                       |
-| DB_NAME     | webshop                                            |
+| DB_NAME     | katalogus                                            |
 | DB_PORT     | 1433                                               |
 
 5. Mentés
