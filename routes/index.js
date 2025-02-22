@@ -41,7 +41,7 @@ router.get('/', async (req, res) => {
     ORDER BY ElemName`);
     //res.json(result.recordset);
     const data = result.recordset;
-    res.render('index', { title: "Termék katalógus (Azure WebApp + SQL)", error: "", data, hostname: hostname });
+    res.render('index', { title: "Katalógus (Azure WebApp + SQL)", error: "", data, hostname: hostname });
     closeConnection();
 
   } catch (err) {
@@ -50,7 +50,7 @@ router.get('/', async (req, res) => {
     const data = [
       { ElemName: "", CategoryName: "" }
     ];
-    res.render('index', { title: "Termék katalógus (Azure WebApp + SQL)", error: "Adatbázis hiba", data, hostname: hostname });
+    res.render('index', { title: "Katalógus (Azure WebApp + SQL)", error: "Adatbázis hiba", data, hostname: hostname });
     closeConnection();
   }
   
